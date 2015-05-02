@@ -1,0 +1,577 @@
+Формат фалов  IDL является стандартным форматом обмена информацией о 
+моделях процессов в нотации IDEF0 между CASE- средствами различных 
+производителей.
+BPwin позволяет  экспортировать модели   IDEF0, включая 
+в файл  IDL дополнительную информацию:
+ Данные стоимостного анализа (ABC);
+ UDP; 
+ ассоциации с объектами модели данных.
+
+BPwin позволяет импортировать файл  IDL с расширением стандарта из
+ Meta Systems; 
+ Wizdom.
+При импорте файла  IDL возможно автоматическая установка интервалов 
+между точками касания стрелок.
+
+Файл idlesc.txt содержит оприсание расширений, которые устанавливает 
+BPwin при экспорте файла  IDL.
+
+
+------------------------------------------------------------------------------
+This file contain information that is proprietary to PLATINUM technology, inc.
+Copyright (c) 1993-1999 PLATINUM technology, inc.                   idlesc.txt
+------------------------------------------------------------------------------
+
+                    PLATINUM technology IDL Escapes
+
+------------------------------------------------------------------------------
+
+All PLATINUM technology escapes begin with the sequence "{LWI c" and end
+with "}" where c is an alpha character used to differentiate multiple entry
+types within the escape.
+
+------------------------------------------------------------------------------
+The MODEL escape -- occurs after the model name
+
+  Subkey F: -- Text font descriptions
+    sample:
+        F  0 -13 0 0 0 400
+           0 0 0 0 3 2 1 34
+           100 'Arial'
+
+    description:
+        F       subkey
+        2       BPwin font index
+        -13     height -- details of this and the fields below are documented
+        0       width        in the Mircosoft LOGFONT structure documentation
+        0       excapement
+        0       orientation
+        400     weight
+        0       italic
+        0       underline
+        0       strikeout
+        0       character set
+        3       out precision
+        2       clip precision
+        1       quality
+        34      pitch & family
+        100     size
+       'Arial' face name
+
+
+  Subkey D -- Default text font indices
+    sample
+        D 0 0 0 0 0 1 0 0 2
+
+    description:
+        D       subkey
+        0       BPwin font index for Context Activity Text
+        0       BPwin font index for Context Arrow Text
+        0       BPwin font index for Decomposition Activity Text
+        0       BPwin font index for Decomposition Arrow Text
+        0       BPwin font index for Text Block Text
+        1       BPwin font index for Frame User Text
+        0       BPwin font index for Frame System Text
+        0       BPwin font index for Nodetree Text
+        2       BPwin font index for Report Text
+
+
+  Subkey G -- Default parent diagram text font indices
+    sample
+        G 0 1
+
+    description:
+        G       subkey
+        0       BPwin font index for parent diagram text
+        1       BPwin font index for parent diagram node number and activity
+                                                                name text
+
+
+  Subkey E -- Model Description
+    sample
+        E 'This is the model definition.'
+
+    description:
+        E                               subkey
+        'This is the model definition.' Model definition
+
+
+  Subkey S -- Model Scope
+    sample
+        S 'This is the model scope.'
+
+    description:
+        S                               subkey
+        'This is the model scope.'      Model scope
+
+
+  Subkey V -- Model Viewpoint
+    sample
+        V 'This is the model viewpoint'
+
+    description:
+        V                               subkey
+        'This is the model viewpoint'   Model viewpoint
+
+
+  Subkey P -- Model Purpose
+    sample
+        P 'Purpose'
+
+    description:
+        P                               subkey
+        'This is the model purpose'     Model Purpose
+
+
+  Subkey O -- Model Source
+    sample
+        O 'this is the model source'
+
+    description:
+        O                               subkey
+        'This is the model source'      Model Source
+
+
+  Subkey T -- Model Status
+    sample
+        T 'WORKING'
+
+    description:
+        T       subkey
+        'WORKING'               Model status
+
+
+  Subkey R -- Model data revision
+    sample
+        R 62
+
+    description:
+        R       subkey
+        50      Model data revision
+
+  Subkey W      UDF cullwords and UDF Categories -- this subkey is located
+                between tables 4 & 5 below
+    sample
+        W ffffffff ffffffff ffffffff ffffffff
+          0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+    description:
+        W       subkey
+        ffffffff  --  32 bit flags (HEX) for activity UDP display
+        ffffffff  --  32 bit flags (HEX) for arrow UDP display
+        ffffffff  --  32 bit flags (HEX) for activity report UDP display
+        ffffffff  --  32 bit flags (HEX) for arrow report UDP display
+        1         --  first of 32 UDP category name flags
+        0         --  second of 32 UDP category name flags
+        ...
+        0         --  last of 32 UDP category name flags
+        'CAT NAME'    first category name
+
+        Note no other category names in this case since all but the first
+        name flags are 0.
+
+
+  Subkey B -- Table data block
+    sample
+        B 1 26 23
+
+    description:
+        B       subkey
+        1       Table number
+        26      Table size
+        23      Used table entries
+
+    Table # 1 (Activity Dictionary Table)
+      sample table entry
+        0 1 0 1 1 0 0 0 1 0.000000 1.000000
+        5 2 7 0 -1
+         'Activity Name'
+         'Activity Definition'
+         'WORKING'
+
+      description of table block entry
+        0                       ID (numbered from 0)
+        1                       state (0 unused, 1 used)
+        0                       UDP count for this activity
+        1                       definition flag (1 if there is one)
+        1                       author flag (1 if there is one)
+        0                       note flag (1 if there is one)
+        0                       source flag (1 if there is one)
+        1                       status flag (1 if there is one)
+        0.000000                duration
+        1.000000                frequency
+        5                       text color index
+        2                       background color index
+        7                       child diagram title color index
+        0                       activity type (0: regular activity
+                                               1: datastore
+                                               2: external which gets its
+                                                  name from an arrow
+                                               3: external which gets its
+                                                  name from an entity
+                                               4: external with its own name
+                                               5-9: IDEF3 junctions)
+        -1                      referenced object (if activity type is not 0
+                                               otherwise -1)
+        'Activity Name'         activity name
+        'Activity Definition'   activity definition (flag was 1)
+        'WORKING'               activity status (flag was 1)
+
+                Note the flags for author, note and source were 0, so they
+                do not appear here. The strings are always in the same order
+                as the flags (definition, author, note, source, status)
+
+
+    Table # 2 (Arrow Dictionary Table)
+      sample table entry
+        0 1 0 1 0 0 1
+        255 255
+         'Activity Name'
+         'Activity Definition'
+         'WORKING'
+
+      description of table block entry
+        0               ID (numbered from 0)
+        1               state
+        0               UDP count for arrow
+        1               Arrow Name flag
+        0               Arrow Definition flag
+        0               Author flag
+        1               Arrow Status flag
+        255             Arrow Text color index  (255 means not defined)
+        255             Arrow color index
+        'Arrow Name'    arrow name
+        'WORKING'       arrow status
+
+                Note the flags for definition and author were 0, so they
+                do not appear here. The strings are always in the same order
+                as the flags (name, definition, author, status)
+
+
+    Table # 3 (Cost Center Table)
+      sample table entry
+        0 1 1 0
+         'ABC'
+      description of table block entry
+        0               ID (numbered from 0)
+        1               state
+        1               cost center name flag
+        0               cost center definition flag
+        'ABC'           cost center name
+
+                Note the flags for definition was 0, so it does not appear
+                here. The strings are always in the same order as the flags
+                (name, definition)
+
+
+    Table # 4 (Activity Costs (one table for each activity))
+      sample table entry
+        0 1 1 2
+      description of table block entry
+        0               Activity ID (numbered from 0)
+        1               state
+        1               cost center ID
+        0               cost ID (numbered from 0)
+        50.00           cost
+
+
+    Table # 5 (UDP definitions)
+      sample table entry
+        0 8 0 1 1
+            128
+         'Event'
+        4
+         'Rentals Returned'
+         'Movie Scanning'
+         'Returns to Inventory'
+         'Create Movies'
+
+        description of table block entry
+          0           UDP ID (numbered from 0)
+          8           UDP Type (text list)
+
+                      UDP Types:
+                        0: unused        1: text          2: paragraph
+                        3: integer       4: command line  5: char
+                        6: sDate         7: real          8: text list
+                        9: integer list 10: command list 11: date list
+                       12: real list    13: char list
+                       Note date format is dd/mm/yyyy
+
+          0           UDP Categories (note this is a 32-bit hex value)
+          1           UDP Name flag
+          1           UDP Data flag (list type UDP)
+          128           Additional type dependent data:
+                        for a list type:
+                              0: single selection
+                            128: multiple selection
+                        for a real (type 7) it is the number of decimals
+                        for a real list (type 12):
+                            if it is < 128, it is the number of decimals
+                            otherwise, it is a multiple selection and the
+                            number of decimals is (n - 128).
+                        for date types (6 and 11):
+                            0: short date format
+                            1: long date format
+
+          'Event'      UDP name
+          4                      count of data entries (if Data flag is not 0)
+          'Rentals Returned'     first data entry
+          'Movie Scanning'       second data entry
+          'Returns to Inventory' third data entry
+          'Create Movies'        fourth data entry
+
+    Table # 6 (Activity UDP tables (one per activity))
+      sample table entry
+        0 2 1 3 0
+        'possible string'
+      description of table block entry
+        0                       ID in this table (numbered from 0)
+        2                       Activity ID
+        1                       UPD ID (ID of the corresponding UDP definition)
+        3                       lower 32-bits of UDP value (HEX)
+        0                       upper 32-bits of UDP value (HEX)
+        'possible string'       text string if type 1,2, or 4 UDP
+
+        Note, UDP values are defined by the following structure
+          typedef union {        // User defined field union
+             double dbl;         // double, float, real
+             sSelList sMultiSel; // multi-select list
+             uDate udate;        // BPwin date union
+             sDate sdate;        // BPwin date structure
+             LPSTR lpstr;        // far pointer to string (or other data)
+             long lng;           // long
+             short sht;          // short
+             char chr;           // character (signed)
+             Byte byt;           // character (unsigned)
+          } uUdf;
+
+      second sample table entry (Multi-select list)
+        0 2 0 2cebed8 30000
+          3
+            0     3
+            1     0
+            2     2
+      description of table block entry
+        0               ID in this table (numbered from 0)
+        2               Activity ID
+        0               UPD ID (ID of the corresponding UDP definition)
+        2cebed8         lower 32-bits of UDP value (HEX)
+        30000           upper 32-bits of UDP value (HEX)
+          3             number of items selected.
+          0             ID in this sub-table (numbered from 0)
+          3             index of first selection 'Create Movies' (see above)
+          1             ID in this sub-table
+          0             index of second selection 'Rentals Returned'
+          2             ID in this sub-table
+          2             index of third selection 'Returns to Inventory'
+
+
+    Table # 7 (Arrow UDP tables (one per arrow))
+
+      This table is identical to Table # 6 except substitute
+                                        arrow for activity.
+
+
+    Table # 8 (Entity Table)
+      sample table entry
+        6 48 25 1 0 1 0
+        'CUSTOMER'
+      description of table block entry
+        6               BPwin Table ID
+        16              state   (16: used, 0: unused)
+        25              ERwin Entity ID
+        1               ERwin Entity Type
+        0               ERwin Diagram ID (always 0)
+        1               Entity Name flag
+        0               Entity Definition flag
+        'CUSTOMER'      Entity Name
+
+                Note the flag for definition was 0, so it does not appear
+                here. The strings are always in the same order as the flags
+                (entity name, definition)
+
+
+    Table # 9 (Attribute Table)
+      sample table entry
+        28 16 25 6 6 0 1 0 0
+         'customer-number'
+      description of table block entry
+        6                       BPwin Table ID
+        16                      state   (16: used, 0: unused)
+        25                      ERwin Entity ID
+        6                       ERwin Attribute ID
+        6                       BPwin Entity table ID
+        0                       ERwin Diagram ID (always 0)
+        1                       Attribute Base Name flag
+        0                       Attribute Role Name flag
+        0                       Attribute Definition flag
+        'customer-number'       Attribute Base Name
+
+                Note the flags for role name and base name were 0, so they
+                do not appear here. The strings are always in the same order
+                as the flags (base name, role name, definition)
+
+
+    Table # 10 (Arrow/Entity/Attribute associations Table)
+      sample table entry
+        0 2 6 28
+      description of table block entry
+        0       BPwin table ID (numbered from 0)
+        2       BPwin Arrow ID
+        6       BPwin Entity table ID
+        28      BPwin Attribute table ID
+
+
+    Table # 11 (CRUD Table)
+      sample table entry
+        0 1 2 3 73 2
+      description of table block entry
+        0       BPwin table ID (numbered from 0)
+        1       BPwin Arrow ID
+        2       BPwin Activity ID
+        3       BPwin Entity table ID
+        73      Arrow type 'I' as integer
+        2       C * 1 + R * 2 + U * 4 + D * 8
+
+
+    Table # 12 (IRUN Table)
+      sample table entry
+        0 1 2 3 73 4
+      description of table block entry
+        0       BPwin table ID (numbered from 0)
+        1       BPwin Arrow ID
+        2       BPwin Activity ID
+        3       BPwin Attribute table ID
+        68      I * 1 + R * 2 + U * 4 + N * 8
+                      + C * 16 + R * 32 + U * 64 + D * 128
+        73      Arrow type 'I' as integer
+
+
+------------------------------------------------------------------------------
+The Box Name escape -- occurs at the beginning of the Box name
+
+    sample:
+        NAME '{LWI I 0 255 255 255}Activity name' ;
+      description of escape fields
+        I       subkey
+        0       font ID
+        255     Activity Text color
+        255     Activity Background color
+        255     Child Diagram Title Text color
+
+
+------------------------------------------------------------------------------
+The Arrow Label escape -- occurs at the beginning of the Label name
+
+    sample:
+        LABEL '{LWI I 0 255 255 }Arrow name' ;
+      description of escape fields
+        I       subkey
+        0       font ID
+        255     Arrow Text color
+        255     Arrow color
+
+
+------------------------------------------------------------------------------
+The Arrow Square Tunnel (or off-page reference) escape - occurs after "TUNNEL"
+
+    simple samples:
+        SOURCE TUNNEL {LWI Q}BORDER ;
+        SOURCE TUNNEL {LWI Q}BOX 1O2;
+        SINK TUNNEL {LWI Q}BORDER ;
+        SINK TUNNEL {LWI Q}BOX 2O1;
+      description of escape fields
+        Q       Indicates square tunnel
+
+    off page reference samples:
+        SOURCE TUNNEL {LWI Q10'activity<CR>one'}BORDER ;
+        SINK TUNNEL {LWI Q10'activity<CR>two'}BORDER ;
+      description of escape fields
+        Q       Indicates square tunnel
+        1       Indicates a reference
+        0       Indicates an off page reference
+             ( Other unimplemented values:
+                 2      will indicate an arrow external reference
+                 3      will indicate an entity external reference
+                 4      will indicate a named external reference )
+        'activity<CR>one'   Name of the parent activity of the
+                            source or destination diagram.
+
+
+------------------------------------------------------------------------------
+The Note Model escape -- occurs at the beginning of the note text
+
+    sample:
+        NOTE TEXT '{LWI I 0 255}Note text block' ;
+      description of escape fields
+        I       subkey
+        0       font ID
+        255     Note Text color
+
+
+------------------------------------------------------------------------------
+The Message Text escape -- occurs at the beginning of the message text
+
+    sample:
+        MEASSGAE ;
+        '{LWI I 0 255}Message text block' ;
+      description of escape fields
+        I       subkey
+        0       font ID
+        255     Note Text color
+
+
+------------------------------------------------------------------------------
+The Diagram Text escape -- occurs at the end of the DIAGRAM TEXT statement
+
+    sample:
+        DIAGRAM TEXT A3T {LWI I 0 } ;
+      description of escape fields
+        I       subkey
+        0       font ID
+
+
+------------------------------------------------------------------------------
+The Activity Glossary escape -- occurs at the end of the DIAGRAM GLOSSARY
+                                                        statement
+
+    sample:
+        DIAGRAM GLOSSARY A3G {LWI A     // A is for activity
+        TERM 'Act one'                  // Activity name
+        'act one definition'            // Activity Definition
+        A 'author name'                 // A is for author name
+        U 'source'                      // U is for source
+        S 'WORKING'                     // S is for status
+        C 255 255 255                   // C is for colors (Text, Background
+                                                        Child Title Text)
+        D 1.500000                      // D is for duration
+        F 1.000000                      // F is for frequency
+        ...
+        ...                             // additional terms
+        ...
+        ENDGLOSS } ;                    // terminate activity glossary and
+                                        // start normal IDL arrow glossary
+
+        Note: each of these fields is optional
+
+
+------------------------------------------------------------------------------
+The Glossary escape -- occurs at the end of the GLOSSARY TERM statement
+
+    sample:
+        TERM 'arrow name'
+        'arrow definition'
+        {LWI N 'note text'              // N is for Note
+        A 'author name'                 // A is for Author Name
+        S 'WORKING'                     // S is for Status
+        C 255,255 } ;                   // C is for colors (Label, Arrow)
+
+        Note: each of these fields is optional
+
+------------------------------------------------------------------------------
+
+A note about color indices:
+
+At the present time, the palettes are not included in the IDL file, so
+the indices only group colors, they do not define them.

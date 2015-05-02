@@ -1,0 +1,204 @@
+KIT ;
+  IDL VERSION 1.2.8 ;
+  TITLE 'Main' ;
+  CREATION DATE 9/4/2014 ;
+  PROJECT NAME 'example' ;
+
+  MODEL 'example'
+    {LWI
+    F 0 -13 0 0 0 400
+      0 0 0 0 3 2 1 34
+      100 'Arial'
+    F 1 -24 0 0 0 400
+      0 0 0 0 3 2 1 34
+      180 'Arial'
+    F 2 -11 0 0 0 400
+      0 0 0 0 3 2 1 49
+      80 'Courier New'
+    F 3 -13 0 900 900 400
+      0 0 0 0 3 2 1 34
+      100 'Arial'
+    D 0 0 0 0 0 1 0 0 2
+    G 0 1
+    T 'WORKING'
+    R 77
+    B 1 10 5
+      0 1 2 1 0 0 0 0 1 0.000000 1.000000
+      255 255 255 0 -1 1 0 -1
+       'Main'
+       'WORKING'
+      1 1 1 1 0 0 0 0 1 0.000000 1.000000
+      255 255 255 0 -1 1 0 -1
+       'pr1'
+       'WORKING'
+      2 1 2 1 0 0 0 0 1 0.000000 1.000000
+      255 255 255 0 -1 1 0 1
+       'pr2'
+       'WORKING'
+      3 1 2 1 0 0 0 0 1 0.000000 1.000000
+      255 255 255 0 -1 1 0 2
+       'pr3'
+       'WORKING'
+      4 1 1 1 0 0 0 0 1 0.000000 1.000000
+      255 255 255 0 -1 1 0 3
+       'pr4'
+       'WORKING'
+      5 0 0 0 0 0 0 0 0 0.0 0.0
+      255 255 255 0 -1 0 0 0
+      6 0 0 0 0 0 0 0 0 0.0 0.0
+      255 255 255 0 -1 0 0 0
+      7 0 0 0 0 0 0 0 0 0.0 0.0
+      255 255 255 0 -1 0 0 0
+      8 0 0 0 0 0 0 0 0 0.0 0.0
+      255 255 255 0 -1 0 0 0
+      9 0 0 0 0 0 0 0 0 0.0 0.0
+      255 255 255 0 -1 0 0 0
+    B 2 10 3
+      0 1 0 1 0 0 1
+      255 255
+       'a1'
+       'WORKING'
+      1 1 0 1 0 0 1
+      255 255
+       'a2'
+       'WORKING'
+      2 1 0 1 0 0 1
+      255 255
+       'a3'
+       'WORKING'
+      3 0 0 0 0 0 0
+      255 255
+      4 0 0 0 0 0 0
+      255 255
+      5 0 0 0 0 0 0
+      255 255
+      6 0 0 0 0 0 0
+      255 255
+      7 0 0 0 0 0 0
+      255 255
+      8 0 0 0 0 0 0
+      255 255
+      9 0 0 0 0 0 0
+      255 255
+    W 32
+   0
+   0
+   0
+   0
+       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    B 5 2 2
+      0 1    0
+      1 0
+          0
+       'label1'
+      1 1    0
+      1 0
+          0
+       'label2'
+    B 6 2 2
+      0 0 0 3fcfbe0 0
+       '1'
+      1 0 1 3fcfe00 0
+       '1'
+    B 6 1 1
+      0 1 0 3fcfc20 0
+       '1_2'
+    B 6 2 2
+      0 2 0 3fcfc30 0
+       '2_3'
+      1 2 1 3fcfe20 0
+       '1_2'
+    B 6 2 2
+      0 3 0 3fcfc40 0
+       '3_4'
+      1 3 1 3fcfd40 0
+       '2'
+    B 6 1 1
+      0 4 0 3fcfc50 0
+       '4'
+    M 0  }
+ ;
+    PROJECT NAME 'example' ;
+
+    DIAGRAM GRAPHIC A-0 ;
+      CREATION DATE 9/4/2014 ;
+      REVISION DATE 9/4/2014 ;
+      TITLE 'Main' ;
+      STATUS WORKING ;
+
+      BOX 0 ;
+        NAME '{LWI I 0 255 255 255}Main' ;
+        BOX COORDINATES (0,32462;0,61789) (0,64923;0,30894) ;
+        DETAIL REFERENCE N A0 ;
+      ENDBOX ;
+
+    ENDDIAGRAM ;
+
+    DIAGRAM GRAPHIC A0 ;
+      CREATION DATE 9/4/2014 ;
+      REVISION DATE 12/4/2014 ;
+      TITLE 'Main' ;
+      STATUS WORKING ;
+
+      BOX 1 ;
+        NAME '{LWI I 0 255 255 255}pr1' ;
+        BOX COORDINATES (0,13526;0,22764) (0,27051;0,11382)  ;
+      ENDBOX ;
+
+      BOX 2 ;
+        NAME '{LWI I 0 255 255 255}pr2' ;
+        BOX COORDINATES (0,32462;0,41463) (0,45987;0,30081)  ;
+      ENDBOX ;
+
+      BOX 3 ;
+        NAME '{LWI I 0 255 255 255}pr3' ;
+        BOX COORDINATES (0,51398;0,60163) (0,64923;0,48780)  ;
+      ENDBOX ;
+
+      BOX 4 ;
+        NAME '{LWI I 0 255 255 255}pr4' ;
+        BOX COORDINATES (0,70334;0,78862) (0,83859;0,67480)  ;
+      ENDBOX ;
+
+      ARROWSEG 1 ;
+        SOURCE BOX 1O1 ;
+        PATH (0,27051;0,17073) (0,29757;0,17073) (0,29757;0,34146) (0,32462;0,
+34146) ;
+        LABEL '{LWI I 0 255 255 }a1' ;
+        LABEL COORDINATES (0,30478;0,26667) ;
+        SINK BOX 2I1 ;
+      ENDSEG ;
+
+      ARROWSEG 2 ;
+        SOURCE BOX 2O1 ;
+        PATH (0,45987;0,35772) (0,48693;0,35772) (0,48693;0,53659) (0,51398;0,
+53659) ;
+        LABEL '{LWI I 0 255 255 }a2' ;
+        LABEL COORDINATES (0,49414;0,42927) ;
+        SINK BOX 3I1 ;
+      ENDSEG ;
+
+      ARROWSEG 3 ;
+        SOURCE BOX 3O1 ;
+        PATH (0,64923;0,56911) (0,67628;0,56911) (0,67628;0,71545) (0,70334;0,
+71545) ;
+        LABEL '{LWI I 0 255 255 }a3' ;
+        LABEL COORDINATES (0,68350;0,65691) ;
+        SINK BOX 4I1 ;
+      ENDSEG ;
+
+    ENDDIAGRAM ;
+
+    DIAGRAM GLOSSARY A0G ;
+     GLOSSARY ;
+      TERM 'a1'
+      '' ;
+      TERM 'a2'
+      '' ;
+      TERM 'a3'
+      '' ;
+     ENDGLOSS ;
+    ENDDIAGRAM ;
+  ENDMODEL ;
+
+ENDKIT ;
